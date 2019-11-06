@@ -11,7 +11,11 @@ exports.config = {
     capabilities: [{
         maxInstances: 5,
         browserName: 'chrome',
+        'goog:chromeOptions': {
+            args: ['--headless']
+        }
     }],
+    sync: false,
     logLevel: 'error',
     bail: 0,
     baseUrl: 'https://demo.applitools.com/hackathon.html',
