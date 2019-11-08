@@ -3,7 +3,7 @@ describe('Test Scenarios not using Applitools Eyes', () => {
 
     before(() => {
         browser.url(browser.options.baseUrl)
-        browser.windowHandleFullscreen();
+        browser.maximizeWindow();
     });
 
     describe('Scenario 1 - Login Page UI Elements Test', () => {
@@ -22,7 +22,6 @@ describe('Test Scenarios not using Applitools Eyes', () => {
             assert.isTrue($('.form-check-input').isExisting());
             assert.isTrue($("[src = 'img/social-icons/twitter.png']").isExisting());
             assert.isTrue($("[src = 'img/social-icons/facebook.png']").isExisting());
-            assert.isTrue(alert - warning);
         })
     })
    

@@ -5,7 +5,8 @@ exports.config = {
         './specs/**/*.js'
     ],
     exclude: [
-         './specs/**/TraditionalTests.js'
+         './specs/**/VisualAITests1.js',
+         './specs/**/VisualAITests.js'
     ],
     maxInstances: 10,
     capabilities: [{
@@ -15,7 +16,7 @@ exports.config = {
             args: ['--headless']
         }
     }],
-    sync: false,
+    sync: true,
     logLevel: 'error',
     bail: 0,
     baseUrl: 'https://demo.applitools.com/hackathon.html',
