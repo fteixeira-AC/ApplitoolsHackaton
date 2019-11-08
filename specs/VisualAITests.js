@@ -1,7 +1,3 @@
-/*Using the simpliest way of appling Applitools Eyes with WebDriverIO,
- by following the WebDriverIO documentation description:
- https: //webdriver.io/docs/applitools-service.html
-*/
 const {
     ClassicRunner,
     Eyes,

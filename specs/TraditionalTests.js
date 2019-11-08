@@ -43,14 +43,14 @@ describe('Test Scenarios not using Applitools Eyes', () => {
                  $('#log-in').click()
                  if (userCredencials[0] != "" && userCredencials[1] != ""){
                      //successful login and Main Screen displayed
-                    assert.isTrue($('.logo-element').isDisplayed())
-                    assert.isTrue($('.logo-label').isDisplayed())
-                    assert.isTrue($('#transactionsTable').isDisplayed())
-                    assert.isTrue($('.element-balances').isDisplayed())
+                    assert.isTrue($('.logo-element').isExisting())
+                    assert.isTrue($('.logo-label').isExisting())
+                    assert.isTrue($('#transactionsTable').isExisting())
+                    assert.isTrue($('.element-balances').isExisting())
                  }
                  else if (userCredencials[0] === "" || userCredencials[1] === ""){
                      //An error happened and a message was displayed
-                    assert.isTrue($('.alert-warning').isDisplayed())
+                    assert.isTrue($('.alert-warning').isExisting())
                  }
              })
          })
