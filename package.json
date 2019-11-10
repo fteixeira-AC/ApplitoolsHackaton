@@ -4,7 +4,9 @@
   "description": "Applitools Hackaton - First Step - not using Applitools Eyes",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/wdio wdio.conf.js"
+    "test": "./node_modules/.bin/wdio wdio.conf.js",
+    "test:visual": "./node_modules/.bin/wdio wdio.conf.js --spec ./specs/VisualAITests1.js",
+    "test:traditional": "./node_modules/.bin/wdio wdio.conf.js --spec ./specs/TraditionalTests.js"
   },
   "author": "Fernando Teixeira",
   "license": "ISC",

@@ -1,7 +1,7 @@
 
 describe('Test Scenarios not using Applitools Eyes', () => {
 
-    before(() => {
+    beforeEach(() => {
         browser.url(browser.options.baseUrl)
         browser.maximizeWindow();
     });
@@ -54,6 +54,58 @@ describe('Test Scenarios not using Applitools Eyes', () => {
                  }
              })
          })
+    })
+
+    describe('Scenario 3 - Table Sort Test', () => {
+
+        it('Verifying Amount Column sort', () => {
+            $('#username').setValue(userCredencials[0])
+            $('#password').setValue(userCredencials[1])
+            $('#log-in').click()
+            $('#amount').click()
+           
+            // Tends to be a very flaky test, due to possible changes on the values
+            assert.equal( $('#transactionsTable > tbody > tr:nth-child(1) > td.text-right > span').getText(), '- 320.00 USD')
+            assert.equal( $('#transactionsTable > tbody > tr:nth-child(2) > td.text-right > span').getText(), '- 244.00 USD')
+            assert.equal( $('#transactionsTable > tbody > tr:nth-child(3) > td.text-right > span').getText(), '+ 17.99 USD')
+            assert.equal( $('#transactionsTable > tbody > tr:nth-child(4) > td.text-right > span').getText(), '+ 340.00 USD')
+            assert.equal( $('#transactionsTable > tbody > tr:nth-child(5) > td.text-right > span').getText(), '+ 952.23 USD')
+            assert.equal( $('#transactionsTable > tbody > tr:nth-child(6) > td.text-right > span').getText(), '+ 1,250.00 USD')
+        })
+    })
+
+    describe('Scenario 4 - Canvas Chart Test', () => {
+
+        it('Verifying the different values in 2017 and 2018', () => {
+            $('#username').setValue(userCredencials[0])
+            $('#password').setValue(userCredencials[1])
+            $('#log-in').click()
+            $('#showExpensesChart').click()
+           
+            /* NOTE: Not able to create to verify the different bars on the Canvas. 
+            Using the 'Inspect element', it is not possible to verify the inner elements, like the bars.
+            */
+        })
+    })
+
+    describe('Scenario 5 - Dynamic Content Test', () => {
+        browser.url(browser.options.baseUrl + '?showAd=true')
+        it('Verifying the Ads gifs', () => {
+            $('#username').setValue(userCredencials[0])
+            $('#password').setValue(userCredencials[1])
+            $('#log-in').click()
+            $('#showExpensesChart').click()
+
+            
+            assert.isTrue($('#flashSale > img[src="img/flashSale.gif"]').isExisting())
+            assert.isTrue($('#flashSale > img[src="img/flashSale2.gif"]').isExisting())
+           
+            /* 
+            When executing in version 2, those asserts will show that the expected gifs are not 
+            being shown. The responsible tester will have to investigate further what happened and 
+            notice that one ofthe gifs is not being displayed and the other one has changed
+            */
+        })
     })
 
 })

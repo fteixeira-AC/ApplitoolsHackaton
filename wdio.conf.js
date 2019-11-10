@@ -5,8 +5,6 @@ exports.config = {
         './specs/**/*.js'
     ],
     exclude: [
-         './specs/**/VisualAITests.js',
-         './specs/**/TraditionalTests.js'
     ],
     maxInstances: 10,
     capabilities: [{
