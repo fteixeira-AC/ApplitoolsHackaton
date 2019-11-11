@@ -8,15 +8,13 @@ eyes.setApiKey("9aUfuVNrcUdWHGqDE1Sn102EHQKnjS4DdbhVySEn61Azg110")
 describe('Test Scenarios using Applitools Eyes', () => {
 
     eyes.setBatch('Applitools Hackaton', 'Applitools Hackaton')
-    beforeEach(async () => {
-          await browser.url(browser.options.baseUrl)
-          await browser.maximizeWindow();
-          viewportSize = await browser.getWindowSize()
+    eyes.setForceFullPageScreenshot(true);
+   
+    beforeEach(() => {
+        browser.url(browser.options.baseUrl)
+        browser.maximizeWindow();
+        viewportSize = browser.getWindowSize()
     });
-
-     after(async () => {
-         await eyes.abortIfNotClosed();
-     });
 
     describe('Scenario 1 - Login Page UI Elements Test', function () {
         it('All the expected elements should exist on the page', async function () {
@@ -42,15 +40,13 @@ describe('Test Scenarios using Applitools Eyes', () => {
         
         userCredencialsDataDriven.forEach( async function (userCredencials) {
             it('Sending the credentials', async function () {
-                const usernameField = await $('#username');
-                usernameField.setValue(userCredencials[0])
-                const passwordField = await $('#password');
-                passwordField.setValue(userCredencials[1]);
-                const LoginButton = await $('#log-in');
-                LoginButton.click()
-                const TransactionTable = await $('#transactionsTable')
-                TransactionTable.waitForDisplayed(5000);
-                
+                  $('#username').setValue(userCredencials[0])
+                  $('#password').setValue(userCredencials[1]);
+                  $('#log-in').click()
+                if (userCredencials[0] != '' && userCredencials[1] != ''){
+                    const TransactionTable = await $('#transactionsTable')
+                    TransactionTable.waitForExist(5000);
+                }                      
                 try {
                     await eyes.open(browser, 'Applitools Hackaton', 'Scenario 2 - Data-Driven Test - ' + userCredencials[2], viewportSize);
                     await eyes.check('Login Credentials Trials', Target.window());
@@ -79,7 +75,7 @@ describe('Test Scenarios using Applitools Eyes', () => {
            
             try {
                 await eyes.open(browser, 'Applitools Hackaton', 'Scenario 3 - Table Sort Test', viewportSize);
-                await eyes.checkRegionByElement(TransactionTable,'Table Sort');
+                await eyes.checkElementBySelector('#transactionsTable');
                 await eyes.close();
             } finally {
                 await eyes.abortIfNotClosed();
@@ -103,10 +99,10 @@ describe('Test Scenarios using Applitools Eyes', () => {
            
             try {
                 await eyes.open(browser, 'Applitools Hackaton', 'Scenario 4 - Canvas Chart Test', viewportSize);
-                await eyes.checkRegionByElement(ExpensesCanvas,'Expenses Canvas Verification 2017 and 2018');
+                await eyes.checkElementBySelector('#canvas')
                 const ButtonShowData = await $('#addDataset');
                 ButtonShowData.click()
-                await eyes.checkRegionByElement(ExpensesCanvas,'Expenses Canvas Verification 2017, 2018 and 2019');
+                await eyes.checkElementBySelector('#canvas');
                 await eyes.close();
             } finally {
                 await eyes.abortIfNotClosed();
@@ -131,8 +127,8 @@ describe('Test Scenarios using Applitools Eyes', () => {
             try {
                 await eyes.open(browser, 'Applitools Hackaton', 'Scenario 5 - Dynamic Content Test', viewportSize);
                 await eyes.setMatchLevel("Layout");
-                await eyes.checkRegionByElement(firstGif,'First Ad gif');
-                await eyes.checkRegionByElement(secondGif,'Second Ad gif');
+                await eyes.checkElementBySelector('#flashSale > img');
+                await eyes.checkElementBySelector('#flashSale2 > img');
                 await eyes.close();
             } finally {
                 await eyes.abortIfNotClosed();
