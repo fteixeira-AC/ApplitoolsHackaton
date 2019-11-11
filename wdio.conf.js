@@ -11,7 +11,7 @@ exports.config = {
         maxInstances: 5,
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: ['--headless']
+            args: ['--headless', '--fullscreen']
         }
     }],
     sync: true,
@@ -21,7 +21,7 @@ exports.config = {
     waitforTimeout: 10000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
-    services: ['chromedriver'],
+    services: ['chromedriver', 'applitools'],
     framework: 'mocha',
     reporters: ['spec'],
     mochaOpts: {
@@ -29,7 +29,12 @@ exports.config = {
         timeout: 60000
     },
     applitoolsKey: "9aUfuVNrcUdWHGqDE1Sn102EHQKnjS4DdbhVySEn61Azg110",
-
+    applitools: {
+        viewport: {
+            'width': 1440,
+            'height': 900
+        }
+    },
     
      before: function () {
          var chai = require('chai');
