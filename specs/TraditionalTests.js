@@ -59,8 +59,8 @@ describe('Test Scenarios not using Applitools Eyes', () => {
     describe('Scenario 3 - Table Sort Test', () => {
 
         it('Verifying Amount Column sort', () => {
-            $('#username').setValue(userCredencials[0])
-            $('#password').setValue(userCredencials[1])
+            $('#username').setValue('admin')
+            $('#password').setValue('admin')
             $('#log-in').click()
             $('#amount').click()
            
@@ -77,8 +77,8 @@ describe('Test Scenarios not using Applitools Eyes', () => {
     describe('Scenario 4 - Canvas Chart Test', () => {
 
         it('Verifying the different values in 2017 and 2018', () => {
-            $('#username').setValue(userCredencials[0])
-            $('#password').setValue(userCredencials[1])
+            $('#username').setValue('admin')
+            $('#password').setValue('admin')
             $('#log-in').click()
             $('#showExpensesChart').click()
            
@@ -91,14 +91,12 @@ describe('Test Scenarios not using Applitools Eyes', () => {
     describe('Scenario 5 - Dynamic Content Test', () => {
         browser.url(browser.options.baseUrl + '?showAd=true')
         it('Verifying the Ads gifs', () => {
-            $('#username').setValue(userCredencials[0])
-            $('#password').setValue(userCredencials[1])
+            $('#username').setValue('admin')
+            $('#password').setValue('admin')
             $('#log-in').click()
-            $('#showExpensesChart').click()
-
             
             assert.isTrue($('#flashSale > img[src="img/flashSale.gif"]').isExisting())
-            assert.isTrue($('#flashSale > img[src="img/flashSale2.gif"]').isExisting())
+            assert.isTrue($('#flashSale2 > img[src="img/flashSale2.gif"]').isExisting())
            
             /* 
             When executing in version 2, those asserts will show that the expected gifs are not 

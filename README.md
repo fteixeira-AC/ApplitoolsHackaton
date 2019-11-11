@@ -20,4 +20,4 @@ Applitools Hackaton Code. **It uses WebDriverIO version 5**.
 
 * I have considered using firstly the Applitools service embedded in WebdriverIO configuration (https://webdriver.io/docs/applitools-service.html). This service is the easier to use Applitools with WebDriverIO, and I was able to configure it very fast, however, this service still have many limitations, like for example, configuring batches properly. My suggestion for Applitools team is to take a look on this integration service, and make the necessary improvements. It will be a win-win situation for the clients/users and for Applitools;
 
-* Keep up the good work and congratulations for this hackaton initiative!! [:smiley:]
+* Keep up the good work and congratulations for this hackaton initiative!! :smiley:
