@@ -10,6 +10,7 @@ describe('Test Scenarios not using Applitools Eyes', () => {
         it('All the expected elements should exist on the page', () => {
             assert.isTrue($('.logo-w').isExisting());
             assert.isTrue($('.auth-header').isExisting());    
+            assert.equal($('.auth-header').getText(),'Login Form');
             assert.isTrue($('.os-icon-user-male-circle').isExisting());
             assert.isTrue($('/html/body/div/div/form/div[1]/label').isExisting());
             assert.isTrue($('#username').isExisting());
@@ -21,6 +22,7 @@ describe('Test Scenarios not using Applitools Eyes', () => {
             assert.isTrue($('.form-check-input').isExisting());
             assert.isTrue($("[src = 'img/social-icons/twitter.png']").isExisting());
             assert.isTrue($("[src = 'img/social-icons/facebook.png']").isExisting());
+            assert.isTrue($("[src = 'img/social-icons/linkedin.png']").isExisting());
         })
     })
 
@@ -36,6 +38,10 @@ describe('Test Scenarios not using Applitools Eyes', () => {
                  $('#username').setValue(userCredencials[0])
                  $('#password').setValue(userCredencials[1])
                  $('#log-in').click()
+                 /*
+                 Note: In the third combination, of 'No Username', the message is displayed in a wrong position.
+                A visual regression testing would fit much better to catch this bug
+                 */
                  if (userCredencials[0] != "" && userCredencials[1] != ""){
                      //successful login and Main Screen displayed
                     assert.isTrue($('.logo-element').isExisting())

@@ -5,6 +5,7 @@ exports.config = {
         './specs/**/*.js'
     ],
     exclude: [
+         './specs/**/VisualAITests1.js'
     ],
     maxInstances: 10,
     capabilities: [{
@@ -17,7 +18,7 @@ exports.config = {
     sync: true,
     logLevel: 'error',
     bail: 0,
-    baseUrl: 'https://demo.applitools.com/hackathon.html',
+    baseUrl: 'https://demo.applitools.com/hackathonV2.html',
     waitforTimeout: 10000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 3,
