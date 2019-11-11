@@ -1,55 +1,15 @@
-const {
-    ClassicRunner,
-    Eyes,
-    Target
-} = require('@applitools/eyes-webdriverio');
-const {
-    Configuration
-} = require('@applitools/eyes-selenium');
-//let eyes = new Eyes();
-let eyes;
-var viewportSize;
-//eyes.setApiKey("9aUfuVNrcUdWHGqDE1Sn102EHQKnjS4DdbhVySEn61Azg110")
-
 describe('Test Scenarios using Applitools Eyes', () => {
 
-    beforeEach(async () => {
+    beforeEach(() => {
           browser.url(browser.options.baseUrl)
           browser.maximizeWindow();
           viewportSize = browser.getWindowSize()
     });
 
-     afterEach(async () => {
-         await eyes.abortIfNotClosed();
-
-         const results = await eyes.getRunner().getAllTestResults(true);
-         console.log(results);
-         console.log(results.getAllResults());
-     });
-
     describe('Scenario 1 - Login Page UI Elements Test', function () {
 
-        it('All the expected elements should exist on the page', async function () {
-            const runner = new ClassicRunner();
-
-            eyes = new Eyes(runner);
-
-            const configuration = new Configuration();
-            configuration.setAppName('Applitools Hackaton');
-            configuration.setTestName('Scenario 1 - Login Page UI Elements Test');
-            configuration.setApiKey("9aUfuVNrcUdWHGqDE1Sn102EHQKnjS4DdbhVySEn61Azg110");
-            configuration.setBatch('Scenario 1 - Login Page UI Elements Test');
-            eyes.setConfiguration(configuration);
-
-            try{
-                //await eyes.open(browser,'Applitools Hackaton', 'Scenario 1 - Login Page UI Elements Test', viewportSize);
-                await eyes.open(browser);
-                await eyes.check('Login Window', Target.window());
-                await eyes.closeAsync();
-            }
-            finally{
-                await eyes.abortIfNotClosed();
-            }
+        it('All the expected elements should exist on the page', function () {         
+           browser.takeSnapshot('login page')
         })
     })
 
@@ -62,59 +22,55 @@ describe('Test Scenarios using Applitools Eyes', () => {
             ['fernando', '12345', 'Username and Password filled']
         ];
 
-        const runner = new ClassicRunner();
+       
+        userCredencialsDataDriven.forEach( function (userCredencials) {
+            it('Sending the credentials: '+userCredencials[2], function () {
+                 $('#username').setValue(userCredencials[0])
+                 $('#password').setValue(userCredencials[1])
+                 $('#log-in').click()
 
-        eyes = new Eyes(runner);
-
-        const configuration = new Configuration();
-        configuration.setAppName('Applitools Hackaton');
-        configuration.setTestName('Scenario 2 - Data - Driven Test');
-        configuration.setApiKey("9aUfuVNrcUdWHGqDE1Sn102EHQKnjS4DdbhVySEn61Azg110");
-        eyes.setConfiguration(configuration);
-        //eyes.setBatch('Scenario 2 - Data - Driven Test');
-        //userCredencialsDataDriven.forEach( async function (userCredencials) {
-            it('Sending the credentials', function () {
-                const usernameField = await $('#username');
-                 usernameField.setValue(userCredencialsDataDriven[0][0])
-                 const passwordField = await $('#password');
-                 passwordField.setValue(userCredencialsDataDriven[1][1]);
-                 const LoginButton = await $('#log-in');
-                 LoginButton.click()
-
-                it('Validating using applitools', async function () {
-                    await eyes.open(browser);
-                    await eyes.check('Main Screen Window', Target.window());
-                    await eyes.closeAsync();
-                })
+                browser.takeSnapshot('login trials: ' + userCredencials[2])
             })
-        //})
-    })
-    
-
-    describe('Scenario 3 - Test', function () {
-
-        it('All the expected elements should exist on the page', async function () {
-            const runner = new ClassicRunner();
-
-            eyes = new Eyes(runner);
-
-            const configuration = new Configuration();
-            configuration.setAppName('Applitools Hackaton');
-            configuration.setTestName('Scenario 3 - Test');
-            configuration.setApiKey("9aUfuVNrcUdWHGqDE1Sn102EHQKnjS4DdbhVySEn61Azg110");
-            configuration.setBatch('Scenario 3 - Test');
-            eyes.setConfiguration(configuration);
-
-            try {
-                await eyes.open(browser);
-                await eyes.check('Login Window', Target.window());
-                await eyes.closeAsync();
-            } finally {
-                await eyes.abortIfNotClosed();
-            }
         })
     })
 
+     describe('Scenario 3 - Table Sort Test', function () {
+
+         it('Verifying Amount Column sort', function () {
+            $('#username').setValue('admin')
+            $('#password').setValue('admin')
+            $('#log-in').click()
+            $('#amount').click()
+            browser.takeRegionSnapshot('Verify transactions table', '#transactionsTable')
+         })
+     })
+
+     describe('Scenario 4 - Canvas Chart Test', function () {
+
+         it('Verifying the different values in 2017 and 2018', function () {
+             $('#username').setValue('admin')
+             $('#password').setValue('admin')
+             $('#log-in').click()
+             $('#showExpensesChart').click()
+             browser.takeRegionSnapshot('Verify Canvas 2017 and 2018', '#canvas')
+             $('#addDataset').click()
+             browser.takeRegionSnapshot('Verify Canvas 2017, 2018 and 2019', '#canvas')
+         })
+     })
+
+     describe('Scenario 5 - Dynamic Content Test', function () {
+         it('Verifying the Ads gifs', function () {
+            $('#username').setValue('admin')
+            $('#password').setValue('admin')
+            $('#log-in').click()
+
+            browser.url(browser.getUrl() + '?showAd=true')
+            
+            browser.takeRegionSnapshot('Verify the Gifs', 'div.element-box-tp')
+
+         })
+     })
+    
 })
 
 
