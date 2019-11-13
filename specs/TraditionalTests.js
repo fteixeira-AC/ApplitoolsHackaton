@@ -51,7 +51,7 @@ describe('Test Scenarios not using Applitools Eyes', () => {
                  }
                  else if (userCredencials[0] === "" || userCredencials[1] === ""){
                      //An error happened and a message was displayed
-                    assert.isTrue($('.alert-warning').isExisting())
+                    assert.isTrue($('.alert-warning').isExisting(), 'The alert message is not being displayed')
                  }
              })
          })
@@ -75,11 +75,7 @@ describe('Test Scenarios not using Applitools Eyes', () => {
     })
 
     describe('Scenario 4 - Canvas Chart Test - No Applitools Eyes', () => {
-        it('Verifying the different values in 2017 and 2018', () => {
-            $('#username').setValue('admin')
-            $('#password').setValue('admin')
-            $('#log-in').click()
-            $('#showExpensesChart').click()       
+        it('Verifying the different values in 2017 and 2018', () => {     
             /* NOTE: Not able to create to verify the different bars on the Canvas. 
             Using the 'Inspect element', it is not possible to verify the inner elements, like the bars. */
         })
@@ -91,8 +87,8 @@ describe('Test Scenarios not using Applitools Eyes', () => {
             $('#username').setValue('admin')
             $('#password').setValue('admin')
             $('#log-in').click()
-            assert.isTrue($('#flashSale > img[src="img/flashSale.gif"]').isExisting())
-            assert.isTrue($('#flashSale2 > img[src="img/flashSale2.gif"]').isExisting())   
+            assert.isTrue($('#flashSale > img').isExisting(), 'The first gif is not being displayed')
+            assert.isTrue($('#flashSale2 > img').isExisting(), 'The second gif is not being displayed')   
             /* When executing in version 2, those asserts will show that the expected gifs are not 
             being shown. The responsible tester will have to investigate further what happened and 
             notice that one ofthe gifs is not being displayed and the other one has changed */

@@ -11,8 +11,6 @@
   "author": "Fernando Teixeira",
   "license": "ISC",
   "devDependencies": {
-    "@applitools/eyes-selenium": "^4.31.16",
-    "@applitools/eyes-webdriverio": "^5.8.2",
     "@types/webdriverio": "^5.0.0",
     "@wdio/applitools-service": "^5.0.0",
     "@wdio/cli": "^5.15.6",
